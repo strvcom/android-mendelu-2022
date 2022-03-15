@@ -19,6 +19,12 @@
     <fragment
         android:id="@+id/counterFragment"
         android:name="com.strv.archdemo.ui.counter.CounterFragment"
-        tools:layout="@layout/fragment_counter" />
+        tools:layout="@layout/fragment_counter">
+
+        <argument
+            android:name="config"
+            app:argType="com.strv.archdemo.ui.counter.CounterConfig" />
+
+    </fragment>
 
 </navigation>

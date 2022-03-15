@@ -1,0 +1,23 @@
+<resources>
+    <!-- Title: Text styles -->
+    <style name="TextAppearance.ArchDemo.Title1" parent="">
+        <item name="android:textSize">40sp</item>
+    </style>
+
+    <style name="TextAppearance.ArchDemo.Title2" parent="">
+        <item name="android:textSize">36sp</item>
+    </style>
+
+    <style name="TextAppearance.ArchDemo.Title3" parent="">
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <style name="TextAppearance.ArchDemo.Regular" parent="">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.ArchDemo.Regular.Bold" parent="TextAppearance.ArchDemo.Regular">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+</resources>
