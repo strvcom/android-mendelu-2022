@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.strv.archdemo.databinding.FragmentMainBinding
+import com.strv.archdemo.ui.counter.CounterConfig
 
 class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
@@ -35,7 +36,11 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.counterButton.setOnClickListener {
-            view.findNavController().navigate(MainFragmentDirections.navigateToCounterFragment())
+            view.findNavController().navigate(
+                MainFragmentDirections.navigateToCounterFragment(
+                    CounterConfig(text = "Hello World!")
+                )
+            )
         }
     }
 }
