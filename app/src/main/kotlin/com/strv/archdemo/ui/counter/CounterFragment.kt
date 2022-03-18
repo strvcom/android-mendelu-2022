@@ -5,19 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.strv.archdemo.databinding.FragmentCounterBinding
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class CounterFragment : Fragment() {
     private var _binding: FragmentCounterBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: CounterViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CounterViewModel::class.java)
-    }
+    private val viewModel by viewModels<CounterViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentCounterBinding.inflate(inflater, container, false)
@@ -31,8 +31,22 @@ class CounterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupBinding()
+    }
 
-        // As we cannot touch the view from ViewModel, this is the best place to do any View <-> ViewModel communication.
+    private fun setupBinding() {
+        // As we cannot touch the view from ViewModel, this is the best place to do any View <-> ViewModel communication
         binding.message.text = viewModel.title
+
+        // Handle plus and minus click logic
+        binding.buttonMinus.setOnClickListener { viewModel.onMinusClick() }
+        binding.buttonPlus.setOnClickListener { viewModel.onPlusClick() }
+
+        // Update the UI based on ViewModel data change
+        lifecycleScope.launch {
+            viewModel.clickCount.collect { count ->
+                binding.clickCount.text = count.toString()
+            }
+        }
     }
 }
