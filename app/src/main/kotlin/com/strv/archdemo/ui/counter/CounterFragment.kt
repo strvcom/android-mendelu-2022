@@ -42,10 +42,19 @@ class CounterFragment : Fragment() {
         binding.buttonMinus.setOnClickListener { viewModel.onMinusClick() }
         binding.buttonPlus.setOnClickListener { viewModel.onPlusClick() }
 
+        binding.buttonBlock.setOnClickListener { viewModel.onBlockingCallClick() }
+        binding.buttonAsync.setOnClickListener { viewModel.onAsyncCallClick() }
+
         // Update the UI based on ViewModel data change
         lifecycleScope.launch {
             viewModel.clickCount.collect { count ->
                 binding.clickCount.text = count.toString()
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.callStatusText.collect { status ->
+                binding.callStatus.text = status
             }
         }
     }

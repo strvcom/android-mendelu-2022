@@ -79,4 +79,44 @@
         app:layout_constraintStart_toEndOf="@id/button_minus"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progress"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="88dp"
+        android:indeterminate="true"
+        app:layout_constraintTop_toBottomOf="@id/button_minus"
+        app:layout_constraintStart_toStartOf="@id/button_minus" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_block"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="Blocking call"
+        app:layout_constraintTop_toTopOf="@id/progress"
+        app:layout_constraintBottom_toTopOf="@id/button_async"
+        app:layout_constraintStart_toEndOf="@id/progress" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_async"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="Async call"
+        app:layout_constraintTop_toBottomOf="@id/button_block"
+        app:layout_constraintBottom_toBottomOf="@id/progress"
+        app:layout_constraintStart_toEndOf="@id/progress" />
+
+    <TextView
+        android:id="@+id/call_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textAppearance="@style/TextAppearance.ArchDemo.Regular.Bold"
+        tools:text="Ready"
+        app:layout_constraintTop_toBottomOf="@id/button_async"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
