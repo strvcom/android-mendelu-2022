@@ -24,6 +24,11 @@ class CounterViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     val preferences: Preferences,
 ) : ViewModel() {
+
+    // DI field injection example
+    //@Inject
+    //lateinit var preferences: Preferences
+
     private val args = CounterFragmentArgs.fromBundle(savedStateHandle.toBundle())
 
     // We should always hold all data (state) inside ViewModel
