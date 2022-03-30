@@ -54,6 +54,20 @@ class CounterViewModel @Inject constructor(
         preferences.updateCounterValueInPreferences(newClickValue)
     }
 
+    internal fun onBlockingCallClick() {
+        runBlocking { callStatusText.emit("Running") }
+        Thread.sleep(3000)
+        runBlocking { callStatusText.emit("Ready") }
+    }
+
+    internal fun onAsyncCallClick() {
+        viewModelScope.launch(Dispatchers.IO) {
+            callStatusText.emit("Running")
+            Thread.sleep(3000)
+            callStatusText.emit("Ready")
+        }
+    }
+
     private fun coroutinesExample() {
         Log.i("Counter", "\tSerial 1")
 
@@ -68,19 +82,5 @@ class CounterViewModel @Inject constructor(
         }
 
         Log.i("Counter", "\tSerial 2")
-    }
-
-    fun onBlockingCallClick() {
-        runBlocking { callStatusText.emit("Running") }
-        Thread.sleep(3000)
-        runBlocking { callStatusText.emit("Ready") }
-    }
-
-    fun onAsyncCallClick() {
-        viewModelScope.launch(Dispatchers.IO) {
-            callStatusText.emit("Running")
-            Thread.sleep(3000)
-            callStatusText.emit("Ready")
-        }
     }
 }
