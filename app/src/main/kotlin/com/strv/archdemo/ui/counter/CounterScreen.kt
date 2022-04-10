@@ -1,5 +1,6 @@
 package com.strv.archdemo.ui.counter
 
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -34,15 +35,16 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.strv.archdemo.R
 import com.strv.archdemo.ui.components.ArchDemoIconButton
 import com.strv.archdemo.ui.theme.ArchDemoTheme
-import kotlinx.coroutines.flow.MutableStateFlow
 
 @Composable
 fun CounterScreen(
     onBack: () -> Unit,
     viewModel: CounterViewModel = viewModel(),
 ) {
+    val state by viewModel.viewState.collectAsState()
+
     CounterContent(
-        viewState = viewModel.viewState,
+        viewState = state,
         onIncreaseCounter = viewModel::onPlusClick,
         onDecreaseCounter = viewModel::onMinusClick,
         onBlockingCall = viewModel::onBlockingCallClick,
@@ -53,15 +55,13 @@ fun CounterScreen(
 
 @Composable
 fun CounterContent(
-    viewState: MutableStateFlow<CounterViewState>,
+    viewState: CounterViewState,
     onIncreaseCounter: () -> Unit,
     onDecreaseCounter: () -> Unit,
     onBlockingCall: () -> Unit,
     onAsyncCall: () -> Unit,
     onBack: () -> Unit,
 ) {
-    val state by viewState.collectAsState()
-
     Scaffold(
         topBar = {
             CounterTopBar(onBack)
@@ -73,16 +73,16 @@ fun CounterContent(
                 .fillMaxSize()
         ) {
 
-            Header(state = state)
+            Header(state = viewState)
 
             Counter(
-                state = state,
+                state = viewState,
                 onDecreaseCounter = onDecreaseCounter,
                 onIncreaseCounter = onIncreaseCounter
             )
 
             Network(
-                state = state,
+                state = viewState,
                 onBlockingCall = onBlockingCall,
                 onAsyncCall = onAsyncCall,
             )
@@ -94,7 +94,7 @@ fun CounterContent(
 private fun CounterTopBar(onBack: () -> Unit) {
     TopAppBar(
         title = {
-            Text(text = "CounterScreeen")
+            Text(text = "CounterScreen")
         },
         navigationIcon = {
             IconButton(
@@ -206,12 +206,31 @@ private fun Network(
     )
 }
 
-@Preview
+@Preview(
+    name = "Night Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+)
+@Preview(
+    name = "Day Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_NO,
+)
 @Composable
 fun CounterScreenPreview() {
+    val state = CounterViewState(
+        title = "Preview",
+        clickCount = 0,
+        callStatus = "Ready"
+    )
     ArchDemoTheme {
         Surface {
-            CounterScreen({})
+            CounterContent(
+                viewState = state,
+                onIncreaseCounter = {},
+                onDecreaseCounter = {},
+                onBlockingCall = {},
+                onAsyncCall = {},
+                onBack = {},
+            )
         }
     }
 }
