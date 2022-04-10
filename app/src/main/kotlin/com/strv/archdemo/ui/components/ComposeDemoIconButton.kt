@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 
 @Composable
-fun ArchDemoIconButton(
+fun ComposeDemoIconButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,

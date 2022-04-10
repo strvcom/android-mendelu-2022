@@ -33,7 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.strv.archdemo.R
-import com.strv.archdemo.ui.components.ArchDemoIconButton
+import com.strv.archdemo.ui.components.ComposeDemoIconButton
 import com.strv.archdemo.ui.theme.ArchDemoTheme
 
 @Composable
@@ -145,7 +145,7 @@ private fun Counter(
         modifier = Modifier.fillMaxWidth()
     ) {
 
-        ArchDemoIconButton(
+        ComposeDemoIconButton(
             onClick = onDecreaseCounter,
             modifier = Modifier
                 .padding(top = 48.dp)
@@ -160,7 +160,7 @@ private fun Counter(
             )
         }
 
-        ArchDemoIconButton(
+        ComposeDemoIconButton(
             onClick = onIncreaseCounter,
             modifier = Modifier
                 .padding(top = 48.dp)
