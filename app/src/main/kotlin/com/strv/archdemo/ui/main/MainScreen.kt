@@ -57,7 +57,7 @@ fun MainScreen(
 fun MainScreenPreview() {
     ArchDemoTheme {
         Surface {
-            MainScreen {}
+            MainScreen({})
         }
     }
 }
