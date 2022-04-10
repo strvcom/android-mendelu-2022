@@ -127,17 +127,17 @@ private fun Counter(
     onDecreaseCounter: () -> Unit,
     onIncreaseCounter: () -> Unit
 ) {
-    Row {
+    Row(
+        modifier = Modifier.padding(top = 48.dp)
+    ) {
         Text(
             text = "Click count: ",
             style = MaterialTheme.typography.body1,
-            modifier = Modifier.padding(top = 48.dp)
         )
 
         Text(
             text = "${state.clickCount}",
             style = MaterialTheme.typography.body1.copy(fontWeight = FontWeight.Bold),
-            modifier = Modifier.padding(top = 48.dp)
         )
     }
     Row(
